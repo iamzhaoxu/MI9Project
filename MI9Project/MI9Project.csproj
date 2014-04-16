@@ -161,7 +161,9 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\azure.pubxml" />
+    <None Include="Properties\PublishProfiles\mi9xuz - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\mi9xuz - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\mi9xuz - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\mi9xuz - Web Deploy.pubxml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
