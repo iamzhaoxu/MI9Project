@@ -33,16 +33,16 @@ namespace MI9Project.Controllers.API
             }
             catch
             {
-                // If any execption were catached from the GetInstance method, we would consider this is bad reqesut and then
-                // return error meesage
+                // If any exception were catched from the GetInstance method, we would consider this is bad request and then
+                // return error message
                 HttpError myCustomError = new HttpError() { { ErrorRes.Error, ErrorRes.BadRequestMessage } };          
                 response = Request.CreateResponse(HttpStatusCode.BadRequest,  myCustomError);
                 response.Content.Headers.ContentType = new MediaTypeHeaderValue(JSONContentType);
                 return response;
             }
 
-            // We need to find out which paryload has drm as true and episode count value is larger than 0.
-            // Create the reponse objects to store image, slug and title of these payloads.
+            // We need to find out which payload has drm as true and episode count value is larger than 0.
+            // Create the response objects to store image, slug and title of these payloads.
             MI9JSONResponse mi9JSONResponse = new MI9JSONResponse();
             foreach (MI9JSONRequest.MI9Payload payload in mi9JSONReqeust.Payload.Where(p => p.Drm && p.EpisodeCount > 0))
             {
