@@ -76,7 +76,7 @@ namespace MI9Project.Models
             // request json at least have the element "payload";
             if (reqeust.IsValid(schema))
             {
-                // Desralize the JSON string to MI9JSONRequest object. If JSON is invalid or not compatiable with the test case, it should throw an exception.
+                // Desralize the JSON string to MI9JSONRequest object. If JSON is invalid or not compatible with the test case, it should throw an exception.
                 MI9JSONRequest instance = JsonConvert.DeserializeObject<MI9JSONRequest>(reqeustJsone);
                 if (instance.Payload == null) throw new Exception(ErrorRes.BadRequestMessage);
                 return instance;
