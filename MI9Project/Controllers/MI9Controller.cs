@@ -49,7 +49,7 @@ namespace MI9Project.Controllers.API
                 mi9JSONResponse.AddResponse(payload.Image.ShowImage, payload.Slug, payload.Title);
             }
             response = Request.CreateResponse(HttpStatusCode.OK);
-            // Desrailize the response object as JSON string and set it back to client side.
+            // Serialize the response object as JSON string and set it back to client side.
             response.Content = new StringContent(JsonConvert.SerializeObject(mi9JSONResponse));
             response.Content.Headers.ContentType = new MediaTypeHeaderValue(JSONContentType);
             return response;
