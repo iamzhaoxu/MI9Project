@@ -106,7 +106,7 @@ namespace MI9Project.Tests.Controllers
 
         #region Helpers
         /// <summary>
-        /// Check wheather the excpected web exception can deliver the bad reqsuet and the error meesage.
+        /// Check whether the web exception can deliver the bad request and the error message.
         /// </summary>
         /// <param name="ex">Web exception</param>
         private void CheckWebException(WebException ex)
@@ -124,9 +124,9 @@ namespace MI9Project.Tests.Controllers
         }
 
         /// <summary>
-        /// Send JSON reqesut via HttpWebReqesut and get the response meesage.
+        /// Send JSON request via HttpWebReqesut and get the response message.
         /// </summary>
-        /// <param name="requestJson">Reqesut JSON string</param>
+        /// <param name="requestJson">Request JSON string</param>
         /// <returns>Response JSON string</returns>
         private string GetActualResponse(string requestJson)
         {
