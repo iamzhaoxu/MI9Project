@@ -37,7 +37,7 @@ namespace MI9Project.Tests.Controllers
         #region Test Methods
 
         /// <summary>
-        /// Test a normarl json reqeust.
+        /// Test a normarl JSON request.
         /// </summary>
         [TestMethod]
         public void TestNormralJSON()
@@ -61,7 +61,7 @@ namespace MI9Project.Tests.Controllers
         }
 
         /// <summary>
-        /// Test a json request with illegal format.
+        /// Test a JSON request with not well-formed format.
         /// </summary>
         [TestMethod]
         public void TestIllegalFormatJSON()
@@ -82,7 +82,7 @@ namespace MI9Project.Tests.Controllers
         }
 
         /// <summary>
-        /// Test a json request with legal formart but invliad against the json schema
+        /// Test a json request with well-formed format but invalid against the json schema
         /// </summary>
         [TestMethod]
         public void TestInvalidJSONAgainstSchema()
