@@ -40,7 +40,7 @@ namespace MI9Project.Tests.Controllers
         /// Test a normarl json reqeust.
         /// </summary>
         [TestMethod]
-        public void TestNormralJSONReqeust()
+        public void TestNormralJSON()
         {
             try
             {
@@ -64,7 +64,7 @@ namespace MI9Project.Tests.Controllers
         /// Test a json request with illegal format.
         /// </summary>
         [TestMethod]
-        public void TestJSONForIllegalFormat()
+        public void TestIllegalFormatJSON()
         {
             try
             {
@@ -85,7 +85,7 @@ namespace MI9Project.Tests.Controllers
         /// Test a json request with legal formart but invliad against the json schema
         /// </summary>
         [TestMethod]
-        public void TestJSONReqeustForInvalidAgainstSchema()
+        public void TestInvalidJSONAgainstSchema()
         {
             try
             {
