@@ -1,20 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
 using System.Text;
-using System.Web.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MI9Project;
-using MI9Project.Controllers;
-using MI9Project.Controllers.API;
 using System.Net;
 using System.IO;
 using MI9Project.Models;
 using Newtonsoft.Json;
 using MI9Project.Tests.Models;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Linq;
 
 namespace MI9Project.Tests.Controllers
 {
@@ -45,6 +36,9 @@ namespace MI9Project.Tests.Controllers
 
         #region Test Methods
 
+        /// <summary>
+        /// Test a normarl json reqeust.
+        /// </summary>
         [TestMethod]
         public void TestNormralJSONReqeust()
         {
@@ -111,7 +105,10 @@ namespace MI9Project.Tests.Controllers
         #endregion
 
         #region Helpers
-
+        /// <summary>
+        /// Check wheather the excpected web exception can deliver the bad reqsuet and the error meesage.
+        /// </summary>
+        /// <param name="ex">Web exception</param>
         private void CheckWebException(WebException ex)
         {
             Assert.IsNotNull(ex.Response);
@@ -126,6 +123,11 @@ namespace MI9Project.Tests.Controllers
             Assert.AreEqual(actualError.Error, expectedError.Error);
         }
 
+        /// <summary>
+        /// Send JSON reqesut via HttpWebReqesut and get the response meesage.
+        /// </summary>
+        /// <param name="requestJson">Reqesut JSON string</param>
+        /// <returns>Response JSON string</returns>
         private string GetActualResponse(string requestJson)
         {
             HttpWebRequest reqeust = (HttpWebRequest)WebRequest.Create(new Uri(_endPoint));
