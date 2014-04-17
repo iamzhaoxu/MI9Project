@@ -73,6 +73,30 @@ namespace MI9Project.Tests {
         
         /// <summary>
         ///   Looks up a localized string similar to {
+        ///    &quot;glossary&quot;: {
+        ///        &quot;title&quot;: &quot;example glossary&quot;,
+        ///		&quot;GlossDiv&quot;: {
+        ///            &quot;title&quot;: &quot;S&quot;,
+        ///			&quot;GlossList&quot;: {
+        ///                &quot;GlossEntry&quot;: {
+        ///                    &quot;ID&quot;: &quot;SGML&quot;,
+        ///					&quot;SortAs&quot;: &quot;SGML&quot;,
+        ///					&quot;GlossTerm&quot;: &quot;Standard Generalized Markup Language&quot;,
+        ///					&quot;Acronym&quot;: &quot;SGML&quot;,
+        ///					&quot;Abbrev&quot;: &quot;ISO 8879:1986&quot;,
+        ///					&quot;GlossDef&quot;: {
+        ///                        &quot;para&quot;: &quot;A meta-markup language, used to create markup languages such as DocBook.&quot;,
+        ///						&quot;GlossSeeAlso&quot;: [&quot;GML&quot;, &quot;XML&quot;]
+        ///              [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string MI9BadRequestForIncompitableJSON {
+            get {
+                return ResourceManager.GetString("MI9BadRequestForIncompitableJSON", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {
         ///    &quot;payload&quot;: [
         ///        {
         ///            &quot;country&quot;: &quot;UK&quot;,
@@ -87,9 +111,9 @@ namespace MI9Project.Tests {
         ///            &quot;nextEpisode&quot;: null,
         ///            &quot;primaryColour&quot;: &quot;#f [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string MI9BadRequest {
+        internal static string MI9BadRequestForInvalidFormatJSON {
             get {
-                return ResourceManager.GetString("MI9BadRequest", resourceCulture);
+                return ResourceManager.GetString("MI9BadRequestForInvalidFormatJSON", resourceCulture);
             }
         }
         

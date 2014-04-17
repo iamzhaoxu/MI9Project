@@ -13,6 +13,8 @@ using System.IO;
 using MI9Project.Models;
 using Newtonsoft.Json;
 using MI9Project.Tests.Models;
+using Newtonsoft.Json.Schema;
+using Newtonsoft.Json.Linq;
 
 namespace MI9Project.Tests.Controllers
 {
@@ -24,6 +26,9 @@ namespace MI9Project.Tests.Controllers
         private string _endPoint;
         private string _contentType;
         private string _method;
+
+        private readonly string NoExceptioinShouldBeExpected = "No exceptioin should be thrown.";
+        private readonly string ExceptionShouldBeExpected = "Exceptioin should not be thown before this step.";
 
         #endregion
 
@@ -41,7 +46,7 @@ namespace MI9Project.Tests.Controllers
         #region Test Methods
 
         [TestMethod]
-        public void TestNormralReqeust()
+        public void TestNormralJSONReqeust()
         {
             try
             {
@@ -57,34 +62,49 @@ namespace MI9Project.Tests.Controllers
             }
             catch
             {
-                Assert.Fail("No exceptioin should be thrown." );
+                Assert.Fail(NoExceptioinShouldBeExpected);
             }
         }
 
+        /// <summary>
+        /// Test a json request with illegal format.
+        /// </summary>
         [TestMethod]
-        public void TestBadRequest()
+        public void TestJSONForIllegalFormat()
         {
             try
             {
-                GetActualResponse(TestSrc.MI9BadRequest);
-                Assert.Fail("Exceptioin should not be thown before this step.");
+                GetActualResponse(TestSrc.MI9BadRequestForInvalidFormatJSON);
+                Assert.Fail(ExceptionShouldBeExpected);
             }
             catch (WebException ex)
             {
-                Assert.IsNotNull(ex.Response);
-                Assert.IsTrue(ex.Response is HttpWebResponse);
-                Assert.AreEqual((ex.Response as HttpWebResponse).StatusCode, HttpStatusCode.BadRequest);
-                Stream stream = ex.Response.GetResponseStream();
-                StreamReader sr = new StreamReader(stream);
-                string result = sr.ReadToEnd();
-                Assert.IsFalse(string.IsNullOrWhiteSpace(result));
-                ErrorMessage actualError = JsonConvert.DeserializeObject<ErrorMessage>(result);
-                ErrorMessage expectedError = JsonConvert.DeserializeObject<ErrorMessage>(TestSrc.Error);
-                Assert.AreEqual(actualError.Error, expectedError.Error);
+                CheckWebException(ex);
             }
             catch
             {
-                Assert.Fail("No exceptioin should be thrown.");
+                Assert.Fail(NoExceptioinShouldBeExpected);
+            }
+        }
+
+        /// <summary>
+        /// Test a json request with legal formart but invliad against the json schema
+        /// </summary>
+        [TestMethod]
+        public void TestJSONReqeustForInvalidAgainstSchema()
+        {
+            try
+            {
+                GetActualResponse(TestSrc.MI9BadRequestForIncompitableJSON);
+                Assert.Fail(ExceptionShouldBeExpected);
+            }
+            catch (WebException ex)
+            {
+                CheckWebException(ex);
+            }
+            catch
+            {
+                Assert.Fail(NoExceptioinShouldBeExpected);
             }
         }
 
@@ -92,7 +112,21 @@ namespace MI9Project.Tests.Controllers
 
         #region Helpers
 
-        public string GetActualResponse(string requestJson)
+        private void CheckWebException(WebException ex)
+        {
+            Assert.IsNotNull(ex.Response);
+            Assert.IsTrue(ex.Response is HttpWebResponse);
+            Assert.AreEqual((ex.Response as HttpWebResponse).StatusCode, HttpStatusCode.BadRequest);
+            Stream stream = ex.Response.GetResponseStream();
+            StreamReader sr = new StreamReader(stream);
+            string result = sr.ReadToEnd();
+            Assert.IsFalse(string.IsNullOrWhiteSpace(result));
+            ErrorMessage actualError = JsonConvert.DeserializeObject<ErrorMessage>(result);
+            ErrorMessage expectedError = JsonConvert.DeserializeObject<ErrorMessage>(TestSrc.Error);
+            Assert.AreEqual(actualError.Error, expectedError.Error);
+        }
+
+        private string GetActualResponse(string requestJson)
         {
             HttpWebRequest reqeust = (HttpWebRequest)WebRequest.Create(new Uri(_endPoint));
             reqeust.ContentType = _contentType;

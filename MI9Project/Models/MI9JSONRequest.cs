@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
 
 namespace MI9Project.Models
 {
@@ -56,6 +58,11 @@ namespace MI9Project.Models
             public string TvChannel { get; set; }
         }
 
+        /// <summary>
+        /// Create a MI9JSONRequest object based on the JSON from the http reqeust.
+        /// </summary>
+        /// <param name="request">A HttpRequest object</param>
+        /// <returns>A MI9JSONRequest object</returns>
         public static MI9JSONRequest GetInstance(HttpRequest request)
         {
             string reqeustJsone = null;
@@ -63,7 +70,21 @@ namespace MI9Project.Models
             {
                 reqeustJsone = reader.ReadToEnd();
             }
-            return JsonConvert.DeserializeObject<MI9JSONRequest>(reqeustJsone);
+            //Check JSON string against the json schema.
+            JsonSchema schema = JsonSchema.Parse(JSONSchemaRes.PayloadSchema);
+            JObject reqeust = JObject.Parse(reqeustJsone);
+            // request json at least have the element "payload";
+            if (reqeust.IsValid(schema))
+            {
+                // Desralize the JSON string to MI9JSONRequest object. If JSON is invalid or not compatiable with the test case, it should throw an exception.
+                MI9JSONRequest instance = JsonConvert.DeserializeObject<MI9JSONRequest>(reqeustJsone);
+                if (instance.Payload == null) throw new Exception(ErrorRes.BadRequestMessage);
+                return instance;
+            }
+            else
+            {
+                throw new Exception(ErrorRes.BadRequestMessage);
+            }
         }
 
         #endregion

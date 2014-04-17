@@ -22,7 +22,10 @@ namespace MI9Project.Controllers.API
         #endregion
 
         #region Web APIs
-
+        /// <summary>
+        /// This is the interface which will be called to filter the playlod list.
+        /// </summary>
+        /// <returns>return a HttpResponseMessage message</returns>
         [System.Web.Http.HttpPost]
         public HttpResponseMessage Filter()
         {

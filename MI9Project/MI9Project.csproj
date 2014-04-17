@@ -149,6 +149,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="JSONSchemaRes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JSONSchemaRes.resx</DependentUpon>
+    </Compile>
     <Compile Include="Models\MI9JSONRequest.cs" />
     <Compile Include="Models\MI9JSONResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -183,6 +188,10 @@
     <EmbeddedResource Include="ErrorRes.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ErrorRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="JSONSchemaRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>JSONSchemaRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
